@@ -1,7 +1,7 @@
 using System;
 using Telegram.Bot.Types.ReplyMarkups;
 
-namespace bot.Factories 
+namespace antiSmokeRoomChatBot.Factories 
 {
     class KeyboardFactory 
     {

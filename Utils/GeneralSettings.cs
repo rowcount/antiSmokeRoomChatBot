@@ -3,7 +3,7 @@ using System.Net;
 using Telegram.Bot;
 using ApiAiSDK;
 
-namespace bot.Utils{
+namespace antiSmokeRoomChatBot.Utils{
     public class GeneralSettings
     {
        private static WebProxy wp = new WebProxy("95.168.185.183:8080", true); //proxy for debug - need to delete

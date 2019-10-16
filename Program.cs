@@ -1,8 +1,8 @@
 ﻿using System;
-using bot.Controllers;
-using bot.Utils;
+using antiSmokeRoomChatBot.Controllers;
+using antiSmokeRoomChatBot.Utils;
 
-namespace bot
+namespace antiSmokeRoomChatBot
 {
     class Program
     {
