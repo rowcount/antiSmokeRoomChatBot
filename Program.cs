@@ -6,7 +6,12 @@ namespace antiSmokeRoomChatBot
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("start");
+            var setting = new GeneralSetting();
+            var bt = new BotController(setting.botClient, setting.apiAi);
+            bt.Startup();
+            Console.ReadKey();
+            bt.Stop();
         }
     }
 }
