@@ -4,7 +4,7 @@ using Telegram.Bot;
 using ApiAiSDK;
 
 namespace bot.Utils{
-    public class GeneralSetting
+    public class GeneralSettings
     {
        private static WebProxy wp = new WebProxy("95.168.185.183:8080", true); //proxy for debug - need to delete
        public readonly TelegramBotClient botClient = new TelegramBotClient("958396719:AAG-g8xJVGlueJq1tczvi5fIjhaJdl4PckQ", wp);
