@@ -1,2 +1,2 @@
 # antiSmokeRoomChatBot
-Chat bot for telegram
+Chat bot for telegram using .net core
