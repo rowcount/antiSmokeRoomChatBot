@@ -1,11 +1,11 @@
 using System;
 using Telegram.Bot;
 using Telegram.Bot.Types;
-using bot.Factories;
-using bot.Utils;
+using AntiSmokeRoomChatBot.Factories;
+using AntiSmokeRoomChatBot.Utils;
 using ApiAiSDK;
 
-namespace bot.Handlers {
+namespace AntiSmokeRoomChatBot.Handlers {
 
     class TextHandler {
         private static readonly string START_MESSAGE =

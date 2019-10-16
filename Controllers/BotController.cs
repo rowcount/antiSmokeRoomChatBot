@@ -3,11 +3,11 @@ using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
 using ApiAiSDK;
-using bot.Factories;
-using bot.Handlers;
-using bot.Utils;
+using AntiSmokeRoomChatBot.Factories;
+using AntiSmokeRoomChatBot.Handlers;
+using AntiSmokeRoomChatBot.Utils;
 
-namespace bot.Controllers
+namespace AntiSmokeRoomChatBot.Controllers
 {
     public class BotController
     {
