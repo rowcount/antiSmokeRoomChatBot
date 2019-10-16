@@ -5,6 +5,7 @@ using Telegram.Bot.Types.Enums;
 using ApiAiSDK;
 using bot.Factories;
 using bot.Handlers;
+using bot.Utils;
 
 namespace bot.Controllers
 {
@@ -15,9 +16,11 @@ namespace bot.Controllers
         private readonly ApiAi _ai;
         private readonly KeyboardFactory _keyboardFactory;
         private readonly TextHandler _textHandler;
+        private readonly Logger _logger;
 
         public BotController(TelegramBotClient bot, ApiAi ai) 
         {
+            _logger = new Logger(this);
             _bot = bot;
             _ai = ai;
             _keyboardFactory = new KeyboardFactory();
@@ -33,7 +36,7 @@ namespace bot.Controllers
             try {
                 _bot.StartReceiving();
             } catch (Exception e) {
-                Console.WriteLine(e.Message);
+                _logger.Log(e.Message);
             }
         }
 
@@ -46,7 +49,7 @@ namespace bot.Controllers
         {
             string buttonText = e.CallbackQuery.Data;
             string name= $"{e.CallbackQuery.From.FirstName} {e.CallbackQuery.From.LastName} ";
-            Console.WriteLine($"{name} pressed {buttonText}");
+            _logger.Log($"{name} pressed {buttonText}");
 
             await _bot.AnswerCallbackQueryAsync(e.CallbackQuery.Id, $"you press {buttonText}");
         }
