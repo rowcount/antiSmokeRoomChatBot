@@ -1,6 +1,6 @@
 using System;
 
-namespace antiSmokeRoomChatBot.Utils {
+namespace AntiSmokeRoomChatBot.Utils {
 
     class Logger {
 
