@@ -1,15 +1,26 @@
-using System;
 using System.Net;
 using Telegram.Bot;
 using ApiAiSDK;
+using AntiSmokeRoomChatBot.Models;
 
-namespace AntiSmokeRoomChatBot.Utils{
-    public class GeneralSettings
+namespace AntiSmokeRoomChatBot.Utils
+{
+    class GeneralSettings
     {
-       private static WebProxy wp = new WebProxy("95.168.185.183:8080", true); //proxy for debug - need to delete
-       public readonly TelegramBotClient botClient = new TelegramBotClient("958396719:AAG-g8xJVGlueJq1tczvi5fIjhaJdl4PckQ", wp);
-       private static AIConfiguration config = new AIConfiguration("45a85b9166c046a8ba11c9e3ed09f581",SupportedLanguage.Russian);
-       public readonly ApiAi apiAi = new ApiAi(config);
+       private WebProxy _wp;
+       private AIConfiguration _config;
+       private Properties _props;
+       public readonly ApiAi apiAi;
+       public readonly TelegramBotClient botClient;
+       
+       public GeneralSettings(Properties props)
+        {
+            _props = props;
+            _wp = new WebProxy(_props.proxy, true);
+            _config = new AIConfiguration(_props.ai_token, SupportedLanguage.Russian);
+            apiAi = new ApiAi(_config);
+            botClient = new TelegramBotClient(_props.telegram_token, _wp);
+        }
     }
 
    

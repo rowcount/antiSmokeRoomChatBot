@@ -27,12 +27,12 @@ namespace AntiSmokeRoomChatBot.Controllers
             _textHandler = new TextHandler(_bot, _keyboardFactory, _ai);
             _bot.OnMessage += BotOnMessageReceived;
             _bot.OnCallbackQuery += BotOnCallbackQueryReceived;
-            var me = _bot.GetMeAsync().Result;
-            Console.WriteLine($"Hello, World! I am user {me.Id} and my name is {me.FirstName}.");
         }
 
         public void Startup() 
         {
+            var me = _bot.GetMeAsync().Result;
+            _logger.Log($"Hello, World! I am user {me.Id} and my name is {me.FirstName}.");
             try {
                 _bot.StartReceiving();
             } catch (Exception e) {
@@ -43,6 +43,11 @@ namespace AntiSmokeRoomChatBot.Controllers
         public void Stop() 
         {
             _bot.StopReceiving();
+        }
+
+        public bool IsReceiving() 
+        {
+            return _bot.IsReceiving;
         }
 
         private async void BotOnCallbackQueryReceived(object sender, CallbackQueryEventArgs e)
