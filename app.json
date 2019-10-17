@@ -1,0 +1,5 @@
+{
+    "proxy":"<insert your proxy>",
+    "telegram_token":"<insert your telegram token>",
+    "ai_token":"<insert your ai token>"
+}
