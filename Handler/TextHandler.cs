@@ -4,6 +4,7 @@ using Telegram.Bot.Types;
 using AntiSmokeRoomChatBot.Factories;
 using AntiSmokeRoomChatBot.Utils;
 using ApiAiSDK;
+using Telegram.Bot.Args;
 
 namespace AntiSmokeRoomChatBot.Handlers {
 
@@ -17,7 +18,6 @@ namespace AntiSmokeRoomChatBot.Handlers {
         private TelegramBotClient _bot;
         private KeyboardFactory _keyboardFactory;
         private ApiAi _ai;
-
         private readonly Logger _logger;
 
 
@@ -28,7 +28,8 @@ namespace AntiSmokeRoomChatBot.Handlers {
             _logger = new Logger(this);
         }
 
-        public async void Handle(Message message) {
+        public async void Handle(MessageEventArgs mea) {
+            var message = mea.Message;
             string answer = "";
             string userName = $"{message.From.FirstName} {message.From.LastName} from {message.Chat.Id}";
             _logger.Log($"{userName} send {message.Text}");

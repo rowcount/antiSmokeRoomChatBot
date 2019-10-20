@@ -12,6 +12,7 @@ namespace AntiSmokeRoomChatBot.Utils
        private Properties _props;
        public readonly ApiAi apiAi;
        public readonly TelegramBotClient botClient;
+       public readonly string conStr;
        
        public GeneralSettings(Properties props)
         {
@@ -20,6 +21,7 @@ namespace AntiSmokeRoomChatBot.Utils
             _config = new AIConfiguration(_props.ai_token, SupportedLanguage.Russian);
             apiAi = new ApiAi(_config);
             botClient = new TelegramBotClient(_props.telegram_token, _wp);
+            conStr = _props.MongodbLocalhost;
         }
     }
 
