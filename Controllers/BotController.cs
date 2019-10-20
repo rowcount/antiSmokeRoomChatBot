@@ -18,13 +18,13 @@ namespace AntiSmokeRoomChatBot.Controllers
         private readonly TextHandler _textHandler;
         private readonly Logger _logger;
 
-        public BotController(TelegramBotClient bot, ApiAi ai) 
+        public BotController(TelegramBotClient bot, ApiAi ai, string conStr) 
         {
             _logger = new Logger(this);
             _bot = bot;
             _ai = ai;
             _keyboardFactory = new KeyboardFactory();
-            _textHandler = new TextHandler(_bot, _keyboardFactory, _ai);
+            _textHandler = new TextHandler(_bot, _keyboardFactory, _ai, conStr);
             _bot.OnMessage += BotOnMessageReceived;
             _bot.OnCallbackQuery += BotOnCallbackQueryReceived;
         }

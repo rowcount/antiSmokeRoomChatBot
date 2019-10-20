@@ -16,7 +16,7 @@ namespace AntiSmokeRoomChatBot
                 var json = new JsonLoader();
                 Properties props = json.Load(args[0]);
                 var setting = new GeneralSettings(props);
-                var bt = new BotController(setting.botClient, setting.apiAi);
+                var bt = new BotController(setting.botClient, setting.apiAi, setting.conStr);
                 bt.Startup();
                 Console.Read();
                 bt.Stop();
