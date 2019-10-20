@@ -18,7 +18,7 @@ namespace AntiSmokeRoomChatBot
                 var setting = new GeneralSettings(props);
                 var bt = new BotController(setting.botClient, setting.apiAi);
                 bt.Startup();
-                Console.ReadKey();
+                Console.Read();
                 bt.Stop();
             }
         }
