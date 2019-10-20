@@ -4,6 +4,7 @@ using Telegram.Bot.Types;
 using AntiSmokeRoomChatBot.Factories;
 using AntiSmokeRoomChatBot.Utils;
 using ApiAiSDK;
+using Telegram.Bot.Args;
 
 namespace AntiSmokeRoomChatBot.Handlers {
 
@@ -17,21 +18,18 @@ namespace AntiSmokeRoomChatBot.Handlers {
         private TelegramBotClient _bot;
         private KeyboardFactory _keyboardFactory;
         private ApiAi _ai;
-        private DataBaseSettings _mongo;
-        private static string _conStr;
         private readonly Logger _logger;
 
 
-        public TextHandler(TelegramBotClient bot, KeyboardFactory keyboardFactory, ApiAi ai, string conStr) {
+        public TextHandler(TelegramBotClient bot, KeyboardFactory keyboardFactory, ApiAi ai) {
             _bot = bot;
             _keyboardFactory = keyboardFactory;
             _ai = ai;
             _logger = new Logger(this);
-            _mongo = new DataBaseSettings();
-            _conStr = conStr;
         }
 
-        public async void Handle(Message message) {
+        public async void Handle(MessageEventArgs mea) {
+            var message = mea.Message;
             string answer = "";
             string userName = $"{message.From.FirstName} {message.From.LastName} from {message.Chat.Id}";
             _logger.Log($"{userName} send {message.Text}");
@@ -54,7 +52,6 @@ namespace AntiSmokeRoomChatBot.Handlers {
                         answer = response.Result.Fulfillment.Speech;
                     } catch (Exception e) {
                         _logger.Log(e.Message);
-                        _mongo.SaveToMongo(_conStr, message.Text);
                     }
                     if (answer == "")
                     {
@@ -63,7 +60,6 @@ namespace AntiSmokeRoomChatBot.Handlers {
                     }
                     else await _bot.SendTextMessageAsync(message.Chat.Id, answer);
                     _logger.Log("Answer: " + answer);
-                    _mongo.SaveToMongo(_conStr, message.Text, message.Chat.Id.ToString());
                     break;
             }
         }

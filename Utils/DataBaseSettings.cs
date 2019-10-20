@@ -11,14 +11,13 @@ namespace AntiSmokeRoomChatBot.Utils
         private IMongoDatabase _database;
         private Message _message;
 
-        public void SaveToMongo(string conStr, string message, string ChatId = "systemMessage")
+        public void SaveToMongo(string conStr, MessageEventArgs mea)
         {
-            _message = new Message();
+            var ChatId = mea.Message.Chat.Id.ToString();
             _database = new MongoClient(conStr)
                 .GetDatabase("antiSmokeRoomChatBot");
-            _message.msg = message;
-            var collection =_database.GetCollection<Message>(ChatId);
-            collection.InsertOne(_message);
+            var collection =_database.GetCollection<MessageEventArgs>(ChatId);
+            collection.InsertOne(mea);
         }
 
     }

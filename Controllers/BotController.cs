@@ -16,17 +16,23 @@ namespace AntiSmokeRoomChatBot.Controllers
         private readonly ApiAi _ai;
         private readonly KeyboardFactory _keyboardFactory;
         private readonly TextHandler _textHandler;
-        private readonly Logger _logger;
+        private readonly Logger _logger;        
+        private DataBaseSettings _mongo;
+        private string _conStr;
 
         public BotController(TelegramBotClient bot, ApiAi ai, string conStr) 
         {
+            _mongo = new DataBaseSettings();
+            _conStr = conStr;
             _logger = new Logger(this);
             _bot = bot;
             _ai = ai;
             _keyboardFactory = new KeyboardFactory();
-            _textHandler = new TextHandler(_bot, _keyboardFactory, _ai, conStr);
+            _textHandler = new TextHandler(_bot, _keyboardFactory, _ai);
             _bot.OnMessage += BotOnMessageReceived;
-            _bot.OnCallbackQuery += BotOnCallbackQueryReceived;
+            _bot.OnCallbackQuery += BotOnCallbackQueryReceived;            
+            
+
         }
 
         public void Startup() 
@@ -61,11 +67,12 @@ namespace AntiSmokeRoomChatBot.Controllers
 
         void BotOnMessageReceived(object sender, MessageEventArgs mea)
         {
+            _mongo.SaveToMongo(_conStr,mea);
             if (mea.Message == null)
                 return;
             switch (mea.Message.Type) {
                 case MessageType.Text:
-                    _textHandler.Handle(mea.Message);
+                    _textHandler.Handle(mea);                    
                     break;
             }
         }
